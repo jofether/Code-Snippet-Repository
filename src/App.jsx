@@ -4,17 +4,17 @@ function App() {
   const [copied, setCopied] = useState(false);
 
   const codeLines = [
-    { num: 1, text: "import React from 'react';", color: "text-purple-400" },
+    { num: 1, text: "import React from 'react';", color: "#a78bfa" },
     { num: 2, text: "", color: "" },
-    { num: 3, text: "function Welcome({ name }) {", color: "text-blue-400" },
-    { num: 4, text: "  return (", color: "text-white" },
-    { num: 5, text: "    <h1 className=\"text-2xl\">", color: "text-green-400" },
-    { num: 6, text: "      Hello, {name}", color: "text-white" },
-    { num: 7, text: "    </h1>", color: "text-green-400" },
-    { num: 8, text: "  );", color: "text-white" },
-    { num: 9, text: "}", color: "text-blue-400" },
+    { num: 3, text: "function Welcome({ name }) {", color: "#93c5fd" },
+    { num: 4, text: "  return (", color: "#ffffff" },
+    { num: 5, text: "    <h1 className=\"text-2xl\">", color: "#6ee7b7" },
+    { num: 6, text: "      Hello, {name}", color: "#ffffff" },
+    { num: 7, text: "    </h1>", color: "#6ee7b7" },
+    { num: 8, text: "  );", color: "#ffffff" },
+    { num: 9, text: "}", color: "#93c5fd" },
     { num: 10, text: "", color: "" },
-    { num: 11, text: "export default Welcome;", color: "text-purple-400" },
+    { num: 11, text: "export default Welcome;", color: "#a78bfa" },
   ];
 
   const handleCopy = () => {
@@ -24,128 +24,279 @@ function App() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const styles = `
+    .code-editor {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    }
+    .code-window {
+      background: linear-gradient(to bottom, #1e293b, #0f172a);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+    .header-bar {
+      background: linear-gradient(90deg, #1e293b, #0e7490);
+    }
+    .line-hover:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  `;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <div className="border-b border-slate-700/50 backdrop-blur-sm bg-slate-900/30">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <svg className="w-8 h-8 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9.4 16.6L4.8 12l4.6-4.6M14.6 16.6l4.6-4.6-4.6-4.6M6.7 19.8h10.6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-            </svg>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Code Snippet Library
-            </h1>
-          </div>
-          <p className="text-slate-400 text-sm">Demonstrating monospace text alignment and line numbering for AI model training</p>
-        </div>
+    <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #1e1b4b 60%, #0f172a 100%)' }} className="min-h-screen py-16 px-4 relative overflow-hidden">
+      <style>{styles}</style>
+      
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div style={{ 
+          background: 'radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 50%)',
+          width: '500px',
+          height: '500px',
+          position: 'absolute',
+          top: '10%',
+          left: '-10%',
+          borderRadius: '50%',
+          filter: 'blur(40px)'
+        }}></div>
+        <div style={{ 
+          background: 'radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)',
+          width: '600px',
+          height: '600px',
+          position: 'absolute',
+          bottom: '-20%',
+          right: '-10%',
+          borderRadius: '50%',
+          filter: 'blur(40px)'
+        }}></div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <h1 style={{ 
+            backgroundImage: 'linear-gradient(90deg, #06b6d4, #0ea5e9, #3b82f6, #8b5cf6)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontSize: '48px',
+            fontWeight: '900',
+            marginBottom: '8px'
+          }}>
+            Code Snippet Library
+          </h1>
+          <p style={{ color: '#94a3b8', fontSize: '16px' }}>Monospace text alignment & line numbering for AI training</p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Code Editor */}
+          {/* Main Code Editor - Spans 2 columns */}
           <div className="lg:col-span-2">
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl overflow-hidden backdrop-blur-sm shadow-2xl hover:border-slate-600/50 transition-colors">
-              
+            <div 
+              className="code-window rounded-2xl overflow-hidden border"
+              style={{ borderColor: 'rgba(148, 163, 184, 0.3)' }}
+            >
               {/* Title Bar */}
-              <div className="bg-gradient-to-r from-slate-700 to-slate-800 px-5 py-3 flex items-center justify-between border-b border-slate-700/50">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80 hover:bg-red-500 transition"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80 hover:bg-amber-500 transition"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition"></div>
-                  <span className="ml-3 text-xs text-slate-400 font-mono tracking-wide">Welcome.jsx</span>
+              <div 
+                className="header-bar px-6 py-4 flex items-center justify-between"
+                style={{ borderBottom: '1px solid rgba(148, 163, 184, 0.2)' }}
+              >
+                <div className="flex items-center gap-3">
+                  <div style={{ 
+                    width: '12px', 
+                    height: '12px', 
+                    borderRadius: '50%',
+                    background: '#ef4444',
+                    boxShadow: '0 0 8px rgba(239, 68, 68, 0.5)',
+                    cursor: 'pointer'
+                  }}></div>
+                  <div style={{ 
+                    width: '12px', 
+                    height: '12px', 
+                    borderRadius: '50%',
+                    background: '#eab308',
+                    boxShadow: '0 0 8px rgba(234, 179, 8, 0.5)',
+                    cursor: 'pointer'
+                  }}></div>
+                  <div style={{ 
+                    width: '12px', 
+                    height: '12px', 
+                    borderRadius: '50%',
+                    background: '#22c55e',
+                    boxShadow: '0 0 8px rgba(34, 197, 94, 0.5)',
+                    cursor: 'pointer'
+                  }}></div>
+                  <span style={{ color: '#64748b', fontSize: '12px', marginLeft: '16px', fontFamily: 'monospace', fontWeight: '500' }}>
+                    Welcome.jsx
+                  </span>
                 </div>
-                <span className="text-xs text-slate-500 font-mono">11 lines</span>
+                <span style={{ color: '#64748b', fontSize: '12px', fontFamily: 'monospace' }}>11 lines</span>
               </div>
 
               {/* Code Content */}
-              <div className="p-6 overflow-x-auto bg-slate-900/30 font-mono text-sm leading-relaxed">
-                <table className="w-full">
-                  <tbody>
-                    {codeLines.map((line) => (
-                      <tr key={line.num} className="hover:bg-slate-700/20 transition-colors">
-                        {/* Line Numbers */}
-                        <td className="pr-6 text-right text-slate-500 select-none border-r border-slate-700/30 w-12 font-mono text-xs py-1">
-                          {line.num}
-                        </td>
-                        {/* Code Content */}
-                        <td className="pl-4 whitespace-pre py-1">
-                          <span className={line.color}>{line.text}</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="code-editor p-8 overflow-x-auto" style={{ fontFamily: 'monospace', fontSize: '14px', lineHeight: '1.8' }}>
+                {codeLines.map((line) => (
+                  <div 
+                    key={line.num}
+                    className="line-hover transition-colors py-1 flex"
+                  >
+                    <div 
+                      style={{ 
+                        color: '#64748b',
+                        width: '48px',
+                        textAlign: 'right',
+                        paddingRight: '24px',
+                        borderRight: '1px solid rgba(148, 163, 184, 0.2)',
+                        userSelect: 'none',
+                        fontWeight: '500'
+                      }}
+                    >
+                      {line.num}
+                    </div>
+                    <div 
+                      style={{ 
+                        color: line.color || '#ffffff',
+                        paddingLeft: '24px',
+                        whiteSpace: 'pre',
+                        flex: 1
+                      }}
+                    >
+                      {line.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer Bar */}
+              <div 
+                style={{ 
+                  background: '#0ea5e9',
+                  color: '#ffffff',
+                  fontSize: '12px',
+                  padding: '8px 16px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}
+              >
+                <div style={{ display: 'flex', gap: '16px' }}>
+                  <span>master</span>
+                  <span>Spaces: 2</span>
+                  <span>UTF-8</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ 
+                    display: 'inline-block',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#86efac',
+                    animation: 'pulse 2s infinite'
+                  }}></span>
+                  <span>JavaScript React</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Sidebar Info & Controls */}
+          {/* Sidebar Info Cards */}
           <div className="flex flex-col gap-6">
-            {/* Info Card */}
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-5 backdrop-blur-sm">
-              <h3 className="text-sm font-semibold text-slate-200 mb-3 uppercase tracking-wider">Details</h3>
-              <div className="space-y-3 text-sm">
-                <div>
-                  <p className="text-slate-500 text-xs uppercase tracking-wide mb-1">Language</p>
-                  <p className="text-cyan-400 font-semibold">JSX / React</p>
-                </div>
-                <div>
-                  <p className="text-slate-500 text-xs uppercase tracking-wide mb-1">Component</p>
-                  <p className="text-blue-400 font-semibold">Welcome</p>
-                </div>
-                <div>
-                  <p className="text-slate-500 text-xs uppercase tracking-wide mb-1">Type</p>
-                  <p className="text-emerald-400 font-semibold">Functional</p>
-                </div>
-              </div>
+            {/* Info Card 1 */}
+            <div 
+              className="rounded-xl p-6 border backdrop-blur-sm transition-all hover:border-cyan-400/50"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.05))',
+                borderColor: 'rgba(6, 182, 212, 0.3)'
+              }}
+            >
+              <div style={{ fontSize: '12px', fontWeight: '700', color: '#06b6d4', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>Language</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', background: 'linear-gradient(90deg, #06b6d4, #0ea5e9)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>React</div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>JSX Component</div>
+            </div>
+
+            {/* Info Card 2 */}
+            <div 
+              className="rounded-xl p-6 border backdrop-blur-sm transition-all hover:border-purple-400/50"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(147, 112, 219, 0.1), rgba(168, 85, 247, 0.05))',
+                borderColor: 'rgba(147, 112, 219, 0.3)'
+              }}
+            >
+              <div style={{ fontSize: '12px', fontWeight: '700', color: '#a78bfa', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>Component</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', background: 'linear-gradient(90deg, #a78bfa, #d8b4fe)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Welcome</div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>11 Lines</div>
+            </div>
+
+            {/* Info Card 3 */}
+            <div 
+              className="rounded-xl p-6 border backdrop-blur-sm transition-all hover:border-emerald-400/50"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.05))',
+                borderColor: 'rgba(16, 185, 129, 0.3)'
+              }}
+            >
+              <div style={{ fontSize: '12px', fontWeight: '700', color: '#10b981', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>Type</div>
+              <div style={{ fontSize: '24px', fontWeight: '900', background: 'linear-gradient(90deg, #10b981, #34d399)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Functional</div>
+              <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '4px' }}>No State</div>
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-3">
+            <div className="space-y-3 mt-2">
               <button
                 onClick={handleCopy}
-                className={`w-full py-3 px-4 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
-                  copied
-                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                    : 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/30 hover:border-cyan-400/50'
-                }`}
+                style={{
+                  background: copied 
+                    ? 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.1))'
+                    : 'linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.1))',
+                  border: `1px solid ${copied ? 'rgba(34, 197, 94, 0.5)' : 'rgba(6, 182, 212, 0.5)'}`,
+                  color: copied ? '#22c55e' : '#06b6d4',
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+                onMouseEnter={(e) => !copied && (e.target.style.borderColor = 'rgba(6, 182, 212, 0.8)')}
+                onMouseLeave={(e) => !copied && (e.target.style.borderColor = 'rgba(6, 182, 212, 0.5)')}
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                </svg>
-                {copied ? 'Copied!' : 'Copy Code'}
+                {copied ? '✓ Copied!' : '📋 Copy Code'}
               </button>
               
-              <button className="w-full py-3 px-4 rounded-lg font-medium text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-blue-500/20 text-blue-400 border border-blue-500/30 hover:bg-blue-500/30 hover:border-blue-400/50">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                </svg>
-                Download .jsx
+              <button
+                style={{
+                  background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(239, 68, 68, 0.1))',
+                  border: '1px solid rgba(236, 72, 153, 0.5)',
+                  color: '#ec4899',
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '12px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+                onMouseEnter={(e) => (e.target.style.borderColor = 'rgba(236, 72, 153, 0.8)')}
+                onMouseLeave={(e) => (e.target.style.borderColor = 'rgba(236, 72, 153, 0.5)')}
+              >
+                ⬇️ Download .jsx
               </button>
-            </div>
-
-            {/* Stats */}
-            <div className="bg-slate-800/30 border border-slate-700/30 rounded-lg p-4">
-              <div className="text-xs text-slate-400 space-y-2">
-                <p>• Font: Monospace (required)</p>
-                <p>• Vertical alignment: Critical</p>
-                <p>• Indentation: Preserved</p>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="border-t border-slate-700/50 mt-12 backdrop-blur-sm bg-slate-900/30">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <p className="text-slate-500 text-sm text-center">
-            AI Model Training Dataset • Monospace Text Alignment & Line Numbering
-          </p>
-        </div>
-      </div>
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 }
