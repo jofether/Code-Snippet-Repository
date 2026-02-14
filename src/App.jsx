@@ -73,7 +73,8 @@ function App() {
         }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      {/* [BUG - LAYERS]: Reversed z-index stacking order. [FIX]: Change z-index from 1 to 10, or remove */}
+      <div className="max-w-7xl mx-auto relative" style={{ zIndex: 1 }}>
         {/* Header */}
         <Header snippetsCount={snippetsData.length} />
 
