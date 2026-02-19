@@ -4,13 +4,10 @@ export function FeaturedSection({ snippets, filteredSnippets, onSelectSnippet, o
       <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#e2e8f0', marginBottom: '24px' }}>
         🌟 Featured Snippets
       </h2>
-      {/* [BUG - LAYOUT]: Using 'grid-rows' instead of 'grid-cols' breaks column layout. [FIX]: Change to 'grid-cols-1 md:grid-cols-3' */}
       <div className="grid grid-rows-1 md:grid-rows-3 gap-6">
         {snippets.slice(0, 3).map(snippet => (
           <div key={snippet.id} style={{
-            // [BUG - SPACING]: Negative margin '-80px' causes cards to overlap and stack. [FIX]: Remove marginTop or set to '0px'
             marginTop: '-80px',
-            // [BUG - LAYERS]: Absolute positioning creates visual overlap and misalignment. [FIX]: Remove position/top styles
             position: 'absolute',
             top: '0px',
             background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.6))',

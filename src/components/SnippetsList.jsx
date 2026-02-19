@@ -8,7 +8,6 @@ function getDifficultyColor(difficulty) {
 }
 
 export function SnippetsList({ filteredSnippets, selectedSnippet, onSelectSnippet }) {
-  {/* [BUG - TYPO]: Invalid grid span 'lg:col-span-99'. [FIX]: Change to 'lg:col-span-2' */}
   return (
     <div className="lg:col-span-99">
       <div style={{ color: '#94a3b8', fontSize: '12px', fontWeight: '600', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>
@@ -17,7 +16,6 @@ export function SnippetsList({ filteredSnippets, selectedSnippet, onSelectSnippe
       <div className="space-y-2 max-h-[800px] overflow-y-auto pr-2">
         {filteredSnippets.map((snippet, idx) => {
           const [bgLight, bgHeavy, color] = getDifficultyColor(snippet.difficulty);
-          {/* [BUG - SPACING]: Negative padding '-10px' causes text overflow. [FIX]: Change to '14px 16px' */}
           return (
             <div
               key={snippet.id}

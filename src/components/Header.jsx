@@ -1,11 +1,9 @@
 export function Header({ snippetsCount }) {
-  {/* [BUG - TYPO]: Invalid Tailwind class 'text-cente'. [FIX]: Use 'text-center' */}
   return (
     <div className="mb-16 text-cente">
       <div style={{ fontSize: '64px', marginBottom: '16px', animation: 'float 4s ease-in-out infinite' }}>
         💻
       </div>
-      {/* [BUG - COLOR]: Text colors match dark background, making text invisible. [FIX]: Restore visible gradient */}
       <h1 style={{ 
         backgroundImage: 'linear-gradient(90deg, #0f172a, #1e293b, #0f172a, #1e293b)',
         backgroundClip: 'text',

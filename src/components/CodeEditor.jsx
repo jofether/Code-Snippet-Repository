@@ -1,5 +1,4 @@
 export function CodeEditor({ currentSnippet, copied, onCopy }) {
-  {/* [BUG - TYPO]: Invalid grid class 'lg:col-span-100'. [FIX]: Change to 'lg:col-span-3' */}
   return (
     <div className="lg:col-span-100">
       <div 
@@ -55,7 +54,6 @@ export function CodeEditor({ currentSnippet, copied, onCopy }) {
               key={line.num}
               className="line-hover transition-colors py-1 flex group"
             >
-              {/* [BUG - CONTRAST]: Line numbers '#0f172a' invisible on dark background. [FIX]: Change to '#94a3b8' */}
               <div 
                 style={{ 
                   color: '#0f172a',
