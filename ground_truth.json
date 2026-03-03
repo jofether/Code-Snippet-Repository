@@ -9,7 +9,7 @@
       "line_number": 76,
       "clean_code": "<div className=\"max-w-7xl mx-auto relative z-10\">",
       "buggy_code": "<div className=\"max-w-7xl mx-auto relative\" style={{ zIndex: 1 }}>",
-      "css_selector": ".max-w-7xl",
+      "css_selector": ".max-w-7xl.mx-auto.relative",
       "bounding_box": {
         "x": 8,
         "y": 8,
@@ -25,7 +25,7 @@
       "line_number": 3,
       "clean_code": "<div className=\"lg:col-span-3\">",
       "buggy_code": "<div className=\"lg:col-span-100\">",
-      "css_selector": ".lg:col-span-3",
+      "css_selector": "div[class*=\"col-span-3\"], div[class*=\"col-span-100\"]",
       "bounding_box": {
         "x": 8,
         "y": 20,
@@ -41,7 +41,7 @@
       "line_number": 59,
       "clean_code": "color: '#64748b',",
       "buggy_code": "color: '#0f172a',",
-      "css_selector": ".code-editor",
+      "css_selector": "div.line-hover > div:first-child",
       "bounding_box": {
         "x": 8,
         "y": 243,
@@ -57,7 +57,7 @@
       "line_number": 7,
       "clean_code": "<div className=\"grid grid-cols-1 md:grid-cols-3 gap-6\">",
       "buggy_code": "<div className=\"grid grid-rows-1 md:grid-rows-3 gap-6\">",
-      "css_selector": ".grid",
+      "css_selector": ".grid.gap-6",
       "bounding_box": {
         "x": 8,
         "y": 100,
@@ -73,12 +73,12 @@
       "line_number": 10,
       "clean_code": "<div key={snippet.id} style={{",
       "buggy_code": "<div key={snippet.id} style={{ marginTop: '-80px',",
-      "css_selector": ".featured-snippet-card",
+      "css_selector": ".grid.gap-6 > div",
       "bounding_box": {
         "x": 8,
         "y": 0,
         "width": 1258,
-        "height": 98
+        "height": 300
       }
     },
     {
@@ -89,7 +89,7 @@
       "line_number": 36,
       "clean_code": "{snippet.category === 'react' ? '⚛️' : '💛'}",
       "buggy_code": "{snippet.category === 'react' ? 'R' : 'JS'}",
-      "css_selector": ".featured-snippet-card",
+      "css_selector": ".grid.gap-6 > div > div:first-child",
       "bounding_box": {
         "x": 29,
         "y": 150,
@@ -105,7 +105,7 @@
       "line_number": 3,
       "clean_code": "<div className=\"mb-16 text-center\">",
       "buggy_code": "<div className=\"mb-16 text-cente\">",
-      "css_selector": ".text-center",
+      "css_selector": ".mb-16",
       "bounding_box": {
         "x": 8,
         "y": 0,
@@ -121,7 +121,7 @@
       "line_number": 8,
       "clean_code": "backgroundImage: 'linear-gradient(90deg, #06b6d4, #0ea5e9, #3b82f6, #8b5cf6)',",
       "buggy_code": "backgroundImage: 'linear-gradient(90deg, #0f172a, #1e293b, #0f172a, #1e293b)',",
-      "css_selector": "h1",
+      "css_selector": ".mb-16 h1",
       "bounding_box": {
         "x": 8,
         "y": 136,
@@ -137,7 +137,7 @@
       "line_number": 11,
       "clean_code": "WebkitTextFillColor: 'transparent',",
       "buggy_code": "WebkitTextFillColor: '#0f172a',",
-      "css_selector": "h1",
+      "css_selector": ".mb-16 h1",
       "bounding_box": {
         "x": 8,
         "y": 136,
@@ -153,7 +153,7 @@
       "line_number": 12,
       "clean_code": "<div className=\"lg:col-span-2\">",
       "buggy_code": "<div className=\"lg:col-span-99\">",
-      "css_selector": ".lg:col-span-2",
+      "css_selector": "div[class*=\"col-span-2\"], div[class*=\"col-span-99\"]",
       "bounding_box": {
         "x": 8,
         "y": 201,
